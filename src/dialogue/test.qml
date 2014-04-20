@@ -1,5 +1,6 @@
 import QtQuick 2.1
 import QtQuick.Window 2.1
+import "Logic.js" as GameLogic
 
 Window {
     visible: true
@@ -34,7 +35,7 @@ Window {
                         ,
                         Choice {
                             playerText: "Exit Game"
-                            responseText: (menu.state.sworeLots ? "Good bye. I love you!" : "Bye...")
+                            responseText: (GameLogic.state.sworeLots ? "Good bye. I love you!" : "Bye...")
                             nextNode: menu //TODO
                         }
                         ,

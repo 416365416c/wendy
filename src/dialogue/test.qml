@@ -9,6 +9,7 @@ Window {
     Item {
         anchors.fill: parent
         Story {
+            currentNode: menu
             allNodes: [
                 TreeNode {
                     id: menu

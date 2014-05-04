@@ -1,12 +1,14 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.1
+import "dialogue" as StoryContent
 
 ApplicationWindow {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Hello World")
+    title: qsTr("Wendy's big day AND ETERNAL NIGHT!")
 
+    /*
     menuBar: MenuBar {
         Menu {
             title: qsTr("File")
@@ -16,7 +18,15 @@ ApplicationWindow {
             }
         }
     }
+    */
 
+    StoryContent.TestContent{
+        id: story
+        onCurrentNodeChanged: {
+            text1.text = text1.text + "\n" + currentNode.prechoiceText;
+            choiceBox.model = currentNode.choices;
+        }
+    }
 
 
     ScrollView {
@@ -26,19 +36,11 @@ ApplicationWindow {
         width: parent.width
         height: 200
 
-        Column{
-            Row{
-                Text {
-                    text: qsTr("Dialogue item 1")
-
-                }
-            }
-            Row {
-                Text {
-                    text: qsTr("Dialogue item 2")
-
-                }
-            }
+        Text {
+            id: text1
+            width: parent.width
+            wrapMode: Text.WordWrap
+            text: "Welcome to Wendy's big day AND ETERNAL NIGHT!"
         }
     }
 
@@ -48,21 +50,32 @@ ApplicationWindow {
         y: 200
         width: parent.width
         height: 200
+        Column {
+            id: choiceCol
+            width: parent.width
+            height: childrenRect.height
+            Repeater {
+                id: choiceBox
+                delegate: Text {
+                    text: playerText
+                    width: parent.width
+                    wrapMode: Text.WordWrap
+                    color: choiceMA.containsMouse ? "red" : "blue"
 
-        Column{
-            Row{
-                Text {
-                    text: qsTr("Dialogue choice 1")
-
-                }
-            }
-            Row {
-                Text {
-                    text: qsTr("Dialogue choice 2")
-
+                    MouseArea {
+                        id: choiceMA
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onClicked: modelData.select()
+                    }
                 }
             }
         }
+        Item {
+            width: parent.width
+            height: 200
+        }
     }
 
+    
 }

@@ -52,7 +52,12 @@ Story {
         }, TreeNode {
             id: gameStart
             prechoiceText: "Once upon a time..."
-            passThrough: n1A
+            choice: [
+                Choice {
+                    playerText: "<Click to Continue>"
+                    nextNode: n1A
+                }
+            ]
         }, TreeNode {
             id: n1A 
             prechoiceText: "W) Come on Gordon, we'll be late for the tea party!\nG) Well my legs are tiny, so you'll just have to wait!"

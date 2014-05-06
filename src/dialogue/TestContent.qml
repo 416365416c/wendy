@@ -7,8 +7,9 @@ Story {
             id: menu
             choices: [
                 Choice {
-                    playerText: "New Game"
+                    playerText: "New Game you bastard"
                     responseText: "" //Null, putting it in the other pass-through node
+                    onSelected: menu.state.sworeLots = true
                     nextNode: gameStart
                 }
                 ,

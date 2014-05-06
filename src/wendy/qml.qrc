@@ -7,6 +7,7 @@
         <file>../dialogue/TestContent.qml</file>
         <file>../dialogue/Choice.qml</file>
         <file>../dialogue/Story.qml</file>
+		<file>../dialogue/State.qml</file>
         <file>../dialogue/TreeNode.qml</file>
     </qresource>
 </RCC>

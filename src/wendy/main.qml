@@ -44,13 +44,17 @@ ApplicationWindow {
         }
     }
 
-    ScrollView {
+    /*ScrollView {
         id: dialogue2
         x: 0
         y: 200
         width: parent.width
+        height: 200 */
+        Column {
+        x: 0
+        y: 200
+        width: parent.width
         height: 200
-        Item {
             id: choiceCol
             //fills the scrollview, and behavior depends on implicit height???
             Repeater {
@@ -72,7 +76,7 @@ ApplicationWindow {
                 }
             }
         }
-    }
+   // }
 
     
 }

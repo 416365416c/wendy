@@ -56,9 +56,10 @@ ApplicationWindow {
             Repeater {
                 id: choiceBox
                 delegate: Text {
+                    id: delegateContainer
                     text: playerText
                     width: parent.width
-                    y: playerText.height * index //HACK: Until I learn scrollview, this spaces single line options
+                    y: delegateContainer.height * index //HACK: Until I learn scrollview, this spaces single line options
                     wrapMode: Text.WordWrap
                     color: choiceMA.containsMouse ? "red" : "blue"
 

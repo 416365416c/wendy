@@ -50,15 +50,15 @@ ApplicationWindow {
         y: 200
         width: parent.width
         height: 200
-        Column {
+        Item {
             id: choiceCol
-            width: parent.width
-            height: childrenRect.height
+            //fills the scrollview, and behavior depends on implicit height???
             Repeater {
                 id: choiceBox
                 delegate: Text {
                     text: playerText
                     width: parent.width
+                    y: playerText.height * index //HACK: Until I learn scrollview, this spaces single line options
                     wrapMode: Text.WordWrap
                     color: choiceMA.containsMouse ? "red" : "blue"
 
@@ -70,10 +70,6 @@ ApplicationWindow {
                     }
                 }
             }
-        }
-        Item {
-            width: parent.width
-            height: 200
         }
     }
 

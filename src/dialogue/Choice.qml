@@ -9,6 +9,7 @@ QtObject {
     property bool enabled: true
     function select() { //Called by UI
         container.selected();//emits signal
+        console.log("choice made: " + container.responseText)
         if (container.nextNode != null) {
             GameLogic.story.currentNode = container.nextNode
         } else {

@@ -52,7 +52,7 @@ Story {
         }, TreeNode {
             id: gameStart
             prechoiceText: "Once upon a time..."
-            choice: [
+            choices: [
                 Choice {
                     playerText: "<Click to Continue>"
                     nextNode: n1A

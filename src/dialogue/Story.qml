@@ -7,7 +7,8 @@ QtObject {
     //Possible second bug: Using TreeNode makes the window never show....
     property list<QtObject> allNodes
     property QtObject currentNode: null
-    property State state: State{}
+    property QtObject lastNode: null //TODO: Hook up
+    property var state: new Object
     //Note that when currentNode changes, the UI will attempt to update to the new value
 
     Component.onCompleted: GameLogic.init(storyContainer, state)

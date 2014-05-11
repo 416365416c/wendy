@@ -23,7 +23,7 @@ ApplicationWindow {
     StoryContent.TestContent{
         id: story
         onCurrentNodeChanged: {
-            text1.text = text1.text + "\n" + currentNode.prechoiceText;
+            text1AlphaNiner.text = text1AlphaNiner.text + "\n" + currentNode.prechoiceText;
             choiceBox.model = currentNode.choices;
         }
     }
@@ -37,7 +37,7 @@ ApplicationWindow {
         height: 200
 
         Text {
-            id: text1
+            id: text1AlphaNiner
             width: parent.width
             wrapMode: Text.WordWrap
             text: "Welcome to Wendy's big day AND ETERNAL NIGHT!"
@@ -62,8 +62,9 @@ ApplicationWindow {
                 delegate: Text {
                     id: delegateContainer
                     text: playerText
-                    width: parent.width
+                    width: parent ? parent.width : 1337
                     y: delegateContainer.height * index //HACK: Until I learn scrollview, this spaces single line options
+                    visible: modelData.enabled
                     wrapMode: Text.WordWrap
                     color: choiceMA.containsMouse ? "red" : "blue"
 
@@ -71,7 +72,10 @@ ApplicationWindow {
                         id: choiceMA
                         anchors.fill: parent
                         hoverEnabled: true
-                        onClicked: modelData.select()
+                        onClicked: {
+                            modelData.select()
+                            text1AlphaNiner.text = text1AlphaNiner.text + "\n" + modelData.responseText;
+                        }
                     }
                 }
             }

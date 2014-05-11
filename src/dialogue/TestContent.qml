@@ -1,15 +1,17 @@
 import "Logic.js" as GameLogic
-//Using only dialogue types
+import QtQml 2.0 //Also uses Timer
 Story {
+    id: testStory
     currentNode: menu
+    property bool stylishMenu: false
+    property int swearJar: 0
     allNodes: [
         TreeNode {
             id: menu
             choices: [
                 Choice {
-                    playerText: "New Game you bastard"
+                    playerText: "New Game"
                     responseText: "" //Null, putting it in the other pass-through node
-                    onSelected: menu.state.sworeLots = true
                     nextNode: gameStart
                 }
                 ,
@@ -22,14 +24,20 @@ Story {
                 Choice {
                     playerText: "Load Game"
                     responseText: "Which game would you like to load?"
-                    nextNode: menu //TODO: Load screen
+                    nextNode: loadNode //TODO: Load screen
                 }
                 ,
                 Choice {
+                    id: exitChoice
                     playerText: "Exit Game"
-                    responseText: (GameLogic.state.sworeLots ? "Good bye. I love you!" : "Bye...")
-                    onSelected: Qt.quit();
-                    nextNode: menu //TODO
+                    responseText: "Good bye. I love you!" //Can't bind with this approach?: "Bye...")
+                    onSelected: {
+                        if (testStory.swearJar > 0)
+                                exitChoice.responseText = "Bye..."
+                        quitTimer.start();
+                    }
+                    property Timer quitTimer: Timer { interval: 1000; onTriggered: Qt.quit(); }
+                    nextNode: menu //???
                 }
                 ,
                 Choice {
@@ -39,17 +47,88 @@ Story {
                 }
                 ,
                 Choice {
+                    id: gameOptions
+                    enabled: !testStory.stylishMenu
                     playerText: "Game Options"
                     responseText: "I'm not implemented yet"
                     nextNode: menu
                 }
                 ,
                 Choice {
-                    playerText: "Insult Game"
-                    responseText: "I'm not implemented yet"
+                    id: gameSorry
+                    enabled: testStory.stylishMenu
+                    playerText: "Sorry, Game"
+                    responseText: "Ask nicely and I'll give you the options back"
+                    nextNode: optionsAsk
+                    onSelected: askingNicely.playerText = askingNicely.basicPlayerText //possible reset
+                }
+                ,
+                Choice {
+                    id: gameInsult
+                    enabled: !testStory.stylishMenu
+                    playerText: "Why not call it 'Options Game' and maintain the pattern? Why even have a separate options screen at all? You're already ruining the immersion and thus the entire game!"
+                    responseText: "Since you asked so nicely, you can have the stylish menu."
+                    onSelected: stylishMenu = true;
                     nextNode: menu
                 }
             ]
+        }, TreeNode {
+            id: loadNode
+            choices: [
+                Choice {
+                    playerText: "FakeGameAlpha"
+                    responseText: "Loading FakeGameAlpha"
+                    nextNode: gameStart
+                },
+                Choice {
+                    playerText: "FakeGameBeta"
+                    responseText: "Loading FakeGameBeta"
+                    nextNode: gameStart
+                },
+                Choice {
+                    playerText: "FakeGameGamma"
+                    responseText: "Loading FakeGameGamma"
+                    nextNode: gameStart
+                }
+            ]
+        }, TreeNode {
+            id: optionsAsk
+            choices: [
+                Choice {
+                    id: askingNicely
+                    property string basicPlayerText: "May I please have the full menu?"
+                    playerText: basicPlayerText
+                    responseText: "Of course"
+                    onSelected: testStory.stylishMenu = false;
+                    nextNode: menu
+                },
+                Choice {
+                    playerText: "Fuck you, I need those options!"
+                    responseText: ""
+                    onSelected: testStory.swearJar += 1
+                    nextNode: menu
+                },
+                Choice {
+                    playerText: "Fuck you! I don't need your stinkin' options!"
+                    responseText: "Of course"
+                    onSelected: testStory.swearJar += 1
+                    nextNode: menu
+                },
+                Choice {
+                    playerText: "It only seems fair to allow access to the options functionality, you big tease."
+                    responseText: "It only seems fair that you apologize after insulting the game menu..."
+                    nextNode: optionsAsk 
+                    onSelected: optionsAsk.askingNicely.playerText = "I'm sorry I insulted your menu. May I please have the full menu back?"
+                }
+            ]
+        }, TreeNode {
+        }, TreeNode {
+        }, TreeNode {
+        }, TreeNode {
+        }, TreeNode {
+        }, TreeNode {
+        }, TreeNode {
+        }, TreeNode {
         }, TreeNode {
             id: gameStart
             prechoiceText: "Once upon a time..."

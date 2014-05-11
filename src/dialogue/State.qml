@@ -1,4 +1,5 @@
 import QtQml 2.1
+//DEFUNCT
 
 QtObject {
     // Is the player a swearer?

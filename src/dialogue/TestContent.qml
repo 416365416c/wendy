@@ -118,7 +118,7 @@ Story {
                     playerText: "It only seems fair to allow access to the options functionality, you big tease."
                     responseText: "It only seems fair that you apologize after insulting the game menu..."
                     nextNode: optionsAsk 
-                    onSelected: optionsAsk.askingNicely.playerText = "I'm sorry I insulted your menu. May I please have the full menu back?"
+                    onSelected: askingNicely.playerText = "I'm sorry I insulted your menu. May I please have the full menu back?"
                 }
             ]
         }, TreeNode {

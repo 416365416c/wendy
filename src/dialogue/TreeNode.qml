@@ -6,7 +6,7 @@ QtObject {
     //Same bug as Story
     property list<QtObject> choices
     property var state: null //Set on entry to this node DEFUNCT
-    property string prechoiceText: "Consider this!"
+    property string prechoiceText: "" //some don't have it
     function select() {
         console.log("TreeNode activated")
 /*

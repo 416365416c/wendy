@@ -23,7 +23,8 @@ ApplicationWindow {
     StoryContent.TestContent{
         id: story
         onCurrentNodeChanged: {
-            text1AlphaNiner.text = text1AlphaNiner.text + "\n" + currentNode.prechoiceText;
+            if(currentNode.prechoiceText != "")
+                historyText.append(currentNode.prechoiceText)
             choiceBox.model = currentNode.choices;
         }
     }
@@ -37,10 +38,13 @@ ApplicationWindow {
         height: 200
 
         Text {
-            id: text1AlphaNiner
+            id: historyText
             width: parent.width
             wrapMode: Text.WordWrap
             text: "Welcome to Wendy's big day AND ETERNAL NIGHT!"
+            function append(newStuff) {
+                historyText.text = historyText.text + '\n' + newStuff
+            }
         }
     }
 
@@ -51,6 +55,7 @@ ApplicationWindow {
         width: parent.width
         height: 200 */
         Column {
+        property Item otherRefToHT: historyText
         x: 0
         y: 200
         width: parent.width
@@ -73,8 +78,9 @@ ApplicationWindow {
                         anchors.fill: parent
                         hoverEnabled: true
                         onClicked: {
-                            modelData.select()
-                            text1AlphaNiner.text = text1AlphaNiner.text + "\n" + modelData.responseText;
+                            historyText.append(modelData.playerText);
+                            historyText.append(modelData.responseText);
+                            modelData.select() //starts cleanup process on this delegate!
                         }
                     }
                 }

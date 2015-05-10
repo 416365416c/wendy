@@ -8,12 +8,9 @@ QtObject {
     property list<QtObject> allNodes
     property QtObject currentNode: null
     property QtObject lastNode: null //TODO: Hook up
-    property var state: new Object
     //Note that when currentNode changes, the UI will attempt to update to the new value
 
-    Component.onCompleted: GameLogic.init(storyContainer, state)
-    onCurrentNodeChanged: {
-        GameLogic.init(storyContainer, state)
-        currentNode.state = GameLogic.state
-    }
+    Component.onCompleted: GameLogic.init(storyContainer)
+    onCurrentNodeChanged:
+        GameLogic.init(storyContainer)
 }

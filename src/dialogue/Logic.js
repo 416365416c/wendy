@@ -1,13 +1,11 @@
 .pragma library
 
-var state = null
-var story = null
+var story = null //Do we really need this ref?
 var initialised = false
 
-function init(what, state_in) {
+function init(what) {
     if (!initialised) {
         story = what
-        state = state_in
         initialised = true
     }
 }

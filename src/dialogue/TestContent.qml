@@ -24,25 +24,23 @@ Story {
                 Choice {
                     playerText: "Load Game"
                     responseText: "Which game would you like to load?"
-                    nextNode: loadNode //TODO: Load screen
+                    nextNode: loadNode //TODO: Load screen (but out of scope for test content)
                 }
                 ,
                 Choice {
                     id: exitChoice
                     playerText: "Exit Game"
-                    responseText: "Good bye. I love you!" //Can't bind with this approach?: "Bye...")
+                    responseText: testStory.swearJar > 0 ? "Bye" : "Good bye. I love you!"
                     onSelected: {
-                        if (testStory.swearJar > 0)
-                                exitChoice.responseText = "Bye..."
                         quitTimer.start();
                     }
                     property Timer quitTimer: Timer { interval: 1000; onTriggered: Qt.quit(); }
-                    nextNode: menu //???
+                    nextNode: menu //Just to keep it from "jumping"
                 }
                 ,
                 Choice {
                     playerText: "Quick Game"
-                    responseText: "I'm not implemented yet" //TODO
+                    responseText: "I'm not implemented yet" //TODO: But needs other engine
                     nextNode: menu
                 }
                 ,
@@ -135,12 +133,13 @@ Story {
             choices: [
                 Choice {
                     playerText: "<Click to Continue>"
+                    responseText: "" //Deliberately no response
                     nextNode: n1A
                 }
             ]
         }, TreeNode {
             id: n1A 
-            prechoiceText: "W) Come on Gordon, we'll be late for the tea party!\nG) Well my legs are tiny, so you'll just have to wait!"
+            prechoiceText: "Wendy) Come on Gordon, we'll be late for the tea party!\nGordon) Well my legs are tiny, so you'll just have to wait!"
             choices: [
                 Choice {
                     playerText: "Aw, look at the cute litte girl playing with her cute little doll"

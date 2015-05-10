@@ -47,7 +47,13 @@ ApplicationWindow {
             }
         }
     }
-
+    BorderImage {
+        width: parent.width; height: parent.height
+        border { left: 50; top: 50; right: 140; bottom: 120 }
+        horizontalTileMode: BorderImage.Stretch
+        verticalTileMode: BorderImage.Stretch
+        source: "../../graphics/speech-user.png"
+    }
     /*ScrollView {
         id: dialogue2
         x: 0
@@ -60,6 +66,7 @@ ApplicationWindow {
         y: 200
         width: parent.width
         height: 200
+
             id: choiceCol
             //fills the scrollview, and behavior depends on implicit height???
             Repeater {

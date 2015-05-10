@@ -8,5 +8,6 @@
         <file>../dialogue/Choice.qml</file>
         <file>../dialogue/Story.qml</file>
         <file>../dialogue/TreeNode.qml</file>
+        <file>../../graphics/speech-user.png</file>
     </qresource>
 </RCC>

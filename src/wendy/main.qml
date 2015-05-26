@@ -133,8 +133,10 @@ ApplicationWindow {
                         anchors.fill: parent
                         hoverEnabled: true
                         onClicked: {
-                            dialogueHistory.append({"speech": modelData.playerText, "player": 1});
-                            dialogueHistory.append({"speech": modelData.responseText, "player": 0});
+                            if(modelData.playerText != "")
+                                dialogueHistory.append({"speech": modelData.playerText, "player": 1});
+                            if(modelData.responseText != "")
+                                dialogueHistory.append({"speech": modelData.responseText, "player": 0});
                             modelData.select() //starts cleanup process on this delegate!
                         }
                     }

@@ -16,7 +16,7 @@ QtObject {
             console.warn("Choice nextNode is null")
         }
         // Call new node's select function
-        GameLogic.story.currentNode.select()
+        GameLogic.story.currentNode.selected()
     }
     signal selected //chance to modify state, before going to nextNode? Might split
 }

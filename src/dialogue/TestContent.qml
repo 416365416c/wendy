@@ -120,14 +120,6 @@ Story {
                 }
             ]
         }, TreeNode {
-        }, TreeNode {
-        }, TreeNode {
-        }, TreeNode {
-        }, TreeNode {
-        }, TreeNode {
-        }, TreeNode {
-        }, TreeNode {
-        }, TreeNode {
             id: gameStart
             prechoiceText: "Once upon a time..."
             choices: [
@@ -138,8 +130,21 @@ Story {
                 }
             ]
         }, TreeNode {
-            id: n1A 
-            prechoiceText: "Wendy) Come on Gordon, we'll be late for the tea party!\nGordon) Well my legs are tiny, so you'll just have to wait!"
+            id: n1A-1
+            prechoiceText: "Wendy) Come on Gordon, we'll be late for the tea party!"
+            onSelected: n1A-1-c.select()
+            choices: [
+                Choice {
+                    //Pass through node
+                    playerText: ""
+                    responseText: "" //Deliberately no response
+                    nextNode: n1A-2
+                    id: n1A-1-c
+                }
+            ]
+        }, TreeNode {
+            id: n1A-2
+            prechoiceText: "Gordon) Well my legs are tiny, so you'll just have to wait!"
             choices: [
                 Choice {
                     playerText: "Aw, look at the cute litte girl playing with her cute little doll"

@@ -27,7 +27,7 @@ ApplicationWindow {
             if(currentNode.prechoiceText != "")
                 //historyText.append(currentNode.prechoiceText)
                 // is this always going to be the NPC?
-                dialogueHistory.append({"speech": currentNode.prechoiceText, "player": 0})
+                dialogue.addSpeech(currentNode.prechoiceText, 0)
             choiceBox.model = currentNode.choices;
         }
     }
@@ -49,12 +49,20 @@ ApplicationWindow {
         orientation: Qt.Vertical
         clip: true
 
+        function addSpeech(speech, player) {
+            // speech: text string
+            // player: boolean is this the player talking
+            dialogueHistory.append({"speech": speech, "player": player})
+            //dialogue.positionViewAtEnd()
+            positionViewAtIndex(count - 1, ListView.End)
+        }
+
         model: dialogueHistory
         delegate: Component {
+
             Item {
                 width: parent.width - 40
                 height: dialogueTextItem.height + 26
-
 
                 BorderImage {
                     id: dialogueTextBorder
@@ -81,6 +89,7 @@ ApplicationWindow {
 
                 }
             }
+
         }
 
     }
@@ -117,9 +126,9 @@ ApplicationWindow {
                 {
                     KeyLogic.reset()
                     if(modelData.playerText != "")
-                        dialogueHistory.append({"speech": modelData.playerText, "player": 1});
+                        dialogue.addSpeech(modelData.playerText, 1)
                     if(modelData.responseText != "")
-                        dialogueHistory.append({"speech": modelData.responseText, "player": 0});
+                        dialogue.addSpeech(modelData.responseText, 0)
                     modelData.select() //starts cleanup process on this delegate!
                 }
 

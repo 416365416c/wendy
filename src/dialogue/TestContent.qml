@@ -121,7 +121,7 @@ Story {
             ]
         }, TreeNode {
             id: gameStart
-            prechoiceText: "Once upon a time..."
+            prechoiceText: "Once upon a time...\n In a land far far away"
             choices: [
                 Choice {
                     playerText: "<Click to Continue>"

@@ -45,8 +45,9 @@ ApplicationWindow {
         x: 0
         y: 0
         width: parent.width
-        height: 200
+        height: 300
         orientation: Qt.Vertical
+        clip: true
 
         model: dialogueHistory
         delegate: Component {
@@ -83,12 +84,19 @@ ApplicationWindow {
         }
 
     }
+
     Column {
         property Item otherRefToHT: dialogueHistory
         x: 0
-        y: 200
+        y: 300
         width: parent.width
         height: 200
+
+        Rectangle {
+            height: 3
+            width: parent.width
+            color: "black"
+        }
 
         id: choiceCol
         //fills the scrollview, and behavior depends on implicit height???

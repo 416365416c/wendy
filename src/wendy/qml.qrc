@@ -9,5 +9,6 @@
         <file>../dialogue/Story.qml</file>
         <file>../dialogue/TreeNode.qml</file>
         <file>../../graphics/speech-user.png</file>
+		<file>../../graphics/speech2.png</file>
     </qresource>
 </RCC>

@@ -24,7 +24,9 @@ ApplicationWindow {
         id: story
         onCurrentNodeChanged: {
             if(currentNode.prechoiceText != "")
-                historyText.append(currentNode.prechoiceText)
+                //historyText.append(currentNode.prechoiceText)
+                // is this always going to be the NPC?
+                dialogueHistory.append({"speech": currentNode.prechoiceText, "player": 0})
             choiceBox.model = currentNode.choices;
         }
     }
@@ -58,27 +60,30 @@ ApplicationWindow {
         model: dialogueHistory
         delegate: Component {
             Item {
-                width: dialogue.width + 40
-                height: dialogueTextItem.height + 120
+                width: parent.width - 40
+                height: dialogueTextItem.height + 26
 
 
                 BorderImage {
                     id: dialogueTextBorder
-                    width: dialogueTextItem.width + 40
-                    height: dialogueTextItem.height + 120
-                    border { left: 50; top: 50; right: 140; bottom: 120 }
+                    //width: dialogueTextItem.width + 40
+                    //height: dialogueTextItem.height + 120
+                    border { left: 12; top: 10; right: 30; bottom: 30 }
                     horizontalTileMode: BorderImage.Stretch
                     verticalTileMode: BorderImage.Stretch
-                    source: "../../graphics/speech-user.png"
+                    source: "../../graphics/speech2.png"
                     mirror: player ? false : true
                     anchors.right: player? parent.right : undefined
+                    anchors.fill: dialogueTextItem
+                    anchors { leftMargin: player? -10 : -30 ; topMargin: -10; rightMargin: player? -30 : -10 ; bottomMargin: -10 }
                 }
 
                 Text {
                     x: 50; y: 50
                     id: dialogueTextItem
                     text: speech
-                    color: player ? "red" : "blue"
+                    wrapMode: Text.Wrap
+                    color: player ? "blue" : "red"
                     anchors.right: player? parent.right : undefined
                     //horizontalAlignment: player ? Text.AlignRight : Text.AlignLeft
 

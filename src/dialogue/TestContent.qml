@@ -126,24 +126,24 @@ Story {
                 Choice {
                     playerText: "<Click to Continue>"
                     responseText: "" //Deliberately no response
-                    nextNode: n1A
+                    nextNode: n1A_1
                 }
             ]
         }, TreeNode {
-            id: n1A-1
+            id: n1A_1
             prechoiceText: "Wendy) Come on Gordon, we'll be late for the tea party!"
-            onSelected: n1A-1-c.select()
+            onSelected: n1A_1_c.select()
             choices: [
                 Choice {
                     //Pass through node
                     playerText: ""
                     responseText: "" //Deliberately no response
-                    nextNode: n1A-2
-                    id: n1A-1-c
+                    nextNode: n1A_2
+                    id: n1A_1_c
                 }
             ]
         }, TreeNode {
-            id: n1A-2
+            id: n1A_2
             prechoiceText: "Gordon) Well my legs are tiny, so you'll just have to wait!"
             choices: [
                 Choice {

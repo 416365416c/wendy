@@ -1,6 +1,7 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.1
 import "dialogue" as StoryContent
+import "keyLogic.js" as KeyLogic
 
 ApplicationWindow {
     visible: true
@@ -91,28 +92,34 @@ ApplicationWindow {
 
         id: choiceCol
         //fills the scrollview, and behavior depends on implicit height???
+        focus: true
+        //Keys.onPressed: console.log("Hello!" + event.key);
+        Keys.onReleased: KeyLogic.process(event.key)
         Repeater {
             id: choiceBox
             delegate: Text {
                 id: delegateContainer
-                text: playerText
+                text: KeyLogic.inputManage(delegateContainer, index) + "." + playerText
                 width: parent ? parent.width : 1337
                 y: delegateContainer.height * index //HACK: Until I learn scrollview, this spaces single line options
                 visible: modelData.enabled
                 wrapMode: Text.WordWrap
                 color: choiceMA.containsMouse ? "red" : "blue"
+                function chooseThis()
+                {
+                    KeyLogic.reset()
+                    if(modelData.playerText != "")
+                        dialogueHistory.append({"speech": modelData.playerText, "player": 1});
+                    if(modelData.responseText != "")
+                        dialogueHistory.append({"speech": modelData.responseText, "player": 0});
+                    modelData.select() //starts cleanup process on this delegate!
+                }
 
                 MouseArea {
                     id: choiceMA
                     anchors.fill: parent
                     hoverEnabled: true
-                    onClicked: {
-                        if(modelData.playerText != "")
-                            dialogueHistory.append({"speech": modelData.playerText, "player": 1});
-                        if(modelData.responseText != "")
-                            dialogueHistory.append({"speech": modelData.responseText, "player": 0});
-                        modelData.select() //starts cleanup process on this delegate!
-                    }
+                    onClicked: delegateContainer.chooseThis();
                 }
             }
         }

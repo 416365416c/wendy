@@ -44,8 +44,9 @@ ApplicationWindow {
         x: 0
         y: 0
         width: parent.width
-        height: 200
+        height: 300
         orientation: Qt.Vertical
+        clip: true
 
 //        Text {
 //            id: historyText
@@ -109,21 +110,30 @@ ApplicationWindow {
         width: parent.width
         height: 200 */
         Column {
-        property Item otherRefToHT: dialogueHistory
-        x: 0
-        y: 200
-        width: parent.width
-        height: 200
-
             id: choiceCol
+            property Item otherRefToHT: dialogueHistory
+            x: 0
+            y: 300
+            anchors.top: dialogueHistory.bottom
+            width: parent.width
+            height: 200
+
+            Rectangle {
+                height: 3
+                width: parent.width
+                color: "black"
+            }
+
+
             //fills the scrollview, and behavior depends on implicit height???
             Repeater {
                 id: choiceBox
                 delegate: Text {
+
                     id: delegateContainer
                     text: playerText
                     width: parent ? parent.width : 1337
-                    y: delegateContainer.height * index //HACK: Until I learn scrollview, this spaces single line options
+                    y: delegateContainer.height * index//HACK: Until I learn scrollview, this spaces single line options
                     visible: modelData.enabled
                     wrapMode: Text.WordWrap
                     color: choiceMA.containsMouse ? "red" : "blue"
